@@ -1,2 +1,0 @@
-### ZippoGame ### 
-My a little first real android project :)
