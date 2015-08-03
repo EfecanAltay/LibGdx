@@ -2,6 +2,7 @@ package com.tutorial.game;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
@@ -32,16 +33,26 @@ public class MyCar extends Actor {
 		sprite = new Sprite(cars[0][0]);
 		sprite.setScale(.5f);
 		setBounds(getX(), getY(), getWidth(), getHeight());
+		
+		sprite.setPosition(getX() - sprite.getWidth()/2, getY() - sprite.getHeight()/2 );
+		sprite.setRotation(getRotation()-90);
+		
+		
 	}
 	@Override
 	public void draw(Batch batch, float parentAlpha) {
 		// TODO Auto-generated method stub
+		sprite.draw(batch);
+	}
+	
+	@Override
+	protected void positionChanged() {
 		sprite.setPosition(getX() - sprite.getWidth()/2, getY() - sprite.getHeight()/2 );
 		sprite.setRotation(getRotation()-90);
-		sprite.draw(batch);
-		
-		super.draw(batch, parentAlpha);
+		setOrigin(getX() - sprite.getWidth()/2, getY() - sprite.getHeight()/2 );
+		super.positionChanged();
 	}
+	
 	@Override
 	public void act(float delta) {
 		// TODO Auto-generated method stub

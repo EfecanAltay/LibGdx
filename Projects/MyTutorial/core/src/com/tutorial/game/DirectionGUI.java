@@ -13,6 +13,7 @@ public class DirectionGUI extends Actor {
 		// TODO Auto-generated constructor stub
 		sprite.setScale(.5f);
 		setBounds(getX(), getY(), sprite.getWidth(), sprite.getHeight());
+		setSize(sprite.getWidth(), sprite.getHeight());
 	}
 	@Override
 	public void draw(Batch batch, float parentAlpha) {
@@ -24,9 +25,10 @@ public class DirectionGUI extends Actor {
 				getY());
 		sprite.setRotation(getRotation());
 		
+		sprite.setScale(getScaleX(), getScaleY());
+		sprite.setSize(getWidth(), getHeight());
+		
 		sprite.draw(batch);
-		
-		
 		
 	}
 	
