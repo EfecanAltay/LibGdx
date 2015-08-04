@@ -23,6 +23,7 @@ public class DirectionGUI extends Actor {
 		sprite.setPosition(
 				getX(),
 				getY());
+		
 		sprite.setRotation(getRotation());
 		
 		sprite.setScale(getScaleX(), getScaleY());
