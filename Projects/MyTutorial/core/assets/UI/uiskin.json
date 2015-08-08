@@ -5,24 +5,11 @@
 	com.badlogic.gdx.graphics.g2d.BitmapFont : { default-font : {file : Gfont/Gfont.fnt } },
 	
 	com.badlogic.gdx.scenes.scene2d.ui.TextButton$TextButtonStyle: { 	 
- 	 default : { down : "button.down" , up : "button.up" , checked : "default.selection" , font : default-font }
+ 	 default : { down : "button.down" , up : "button.up" , font : default-font }
 	},
 	
 	
-	com.badlogic.gdx.scenes.scene2d.ui.List$ListStyle: {
-    	default : { font: default-font  ,  selection : "button.checked" , background : "button.down" }
-	}
-	
 	com.badlogic.gdx.scenes.scene2d.ui.Window$WindowStyle : {
-		default : {
-		 titleFont : default-font , background : "window.background"
-		}
+	 default : { titleFont : default-font }
 	}
-	com.badlogic.gdx.scenes.scene2d.ui.ScrollPane$ScrollPaneStyle : 
-	{
-		default : {
-			background : "button.up" , hScroll : "button.up",  hScrollKnob : "button.up",  vScroll : "button.up",  vScrollKnob : "button.up"
-		}
-	}
-	
 }

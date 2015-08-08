@@ -45,6 +45,5 @@ public class RunClass extends ApplicationAdapter{
 		mS.dispose();
 		//gS.dispose();
 		
-		
 	}
 }
