@@ -2,15 +2,17 @@ package com.tutorial.game;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
-import com.badlogic.gdx.InputProcessor;
+import com.badlogic.gdx.Input.Keys;
+import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.EventListener;
 
-public class MyCar extends Actor {
+public class Car extends Actor {
 
 	TextureRegion region = new TextureRegion(new Texture("Cars.png"));
 	
@@ -23,9 +25,13 @@ public class MyCar extends Actor {
 	final float maxSpeed = 5  ;
 	final float minSpeed = 3 ;
 	
+	OrthographicCamera cam ;
 	
+	DirectionGUI dG;
 	
-	public MyCar() {
+	boolean selected =  false; 
+	
+	public Car() {
 		// TODO Auto-generated constructor stub
 		direction = new Vector2();
 		
@@ -38,18 +44,39 @@ public class MyCar extends Actor {
 		sprite.setRotation(getRotation()-90);
 		
 		
+		cam = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+		cam.zoom = .5f ;
+		cam.lookAt(0, 0, 0);
+		
+		cam.update();
+		
+		dG = new DirectionGUI();
+		dG.setScale(.5f * cam.zoom);
+		dG.setPosition(cam.position.x, cam.position.y);
+		
 	}
+	
+	
 	@Override
 	public void draw(Batch batch, float parentAlpha) {
 		// TODO Auto-generated method stub
 		sprite.draw(batch);
+		
 	}
 	
 	@Override
 	protected void positionChanged() {
+		
+		
+		
 		sprite.setPosition(getX() - sprite.getWidth()/2, getY() - sprite.getHeight()/2 );
 		sprite.setRotation(getRotation()-90);
 		setOrigin(getX() - sprite.getWidth()/2, getY() - sprite.getHeight()/2 );
+		
+		dG.setScale(.5f * cam.zoom);
+		//System.out.println(dG.getScaleX());
+		dG.setPosition(this.getOriginX(), this.getOriginY());
+		
 		super.positionChanged();
 	}
 	
@@ -66,6 +93,9 @@ public class MyCar extends Actor {
 		else if(speed < -.5f)
 			this.setRotation(getRotation() + directionDgree);
 		
+		
+		if(selected){
+			
 		if(Gdx.input.isKeyPressed(Input.Keys.UP)){
 			if(speed < maxSpeed)
 			speed+= .1f;
@@ -99,7 +129,30 @@ public class MyCar extends Actor {
 					else 
 						directionDgree = 0 ;	
 			}
-	
+			
+			
+			zoomControl(this.getSpeed(), cam);
+			
+			dG.setRotation(this.directionDgree * 180/ 3.14f * 2);
+			
+			cam.position.set(this.getX(), this.getY(), 0);
+
+			if(Gdx.input.isKeyJustPressed(Keys.C)){
+				exitCar();
+			}
+			
+			
+		}
+		else{
+			if(speed > .1f)
+				speed -= .1f;
+				else if(speed < -.1f)
+				speed += .1f;
+				else 
+				speed = 0 ;
+		}
+			
+			
 	}
 	public float getSpeed(){
 		return speed;
@@ -107,5 +160,15 @@ public class MyCar extends Actor {
 	public float getDirectionDgree(){
 		return (float)((directionDgree*Math.PI)/180);
 	}
+	public static void zoomControl(float speed,OrthographicCamera cam){
+		
+		if(cam.zoom >= .5f && cam.zoom <= 1f && speed/50 < .5f && speed > 0)
+			cam.zoom = speed/50+.5f ;
+	}
+	public void exitCar(){
+		selected = false ;
+		
+	}
+	
 	
 }

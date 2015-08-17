@@ -3,105 +3,46 @@ package com.tutorial.game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.badlogic.gdx.scenes.scene2d.Event;
-import com.badlogic.gdx.scenes.scene2d.EventListener;
-import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
-import com.badlogic.gdx.scenes.scene2d.ui.List;
-import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
-import com.badlogic.gdx.scenes.scene2d.ui.Slider;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
-import com.badlogic.gdx.scenes.scene2d.ui.Window;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Align;
-import com.badlogic.gdx.utils.Timer;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 
-public class MenuScreen implements Screen{
+public class MenuScreen implements Screen {
 
 	Stage stage ;
 	Table table ;
-	TextButton btn ;
 	
-	ScrollPane sp ;
+	TextureAtlas atlas = new TextureAtlas("UI/uIDesing.pack");
 	
-	List list ;
+	Skin skin = new Skin(Gdx.files.internal("UI/uIDesing.json"),atlas);
 	
-	TextureAtlas atlas = new TextureAtlas("UI/Atlas.pack");
+	final TextButton btnStartGame = new TextButton("Start Game",skin);
+	final TextButton btnQuitGame = new TextButton("Quit Game",skin);
 	
-	Skin skin = new Skin(Gdx.files.internal("UI/uiskin.json"),atlas);
-	
-	final Dialog dialog = new Dialog("Hello player", skin);
-	
-	@Override
-	public void show() {
+	public MenuScreen() {
 		// TODO Auto-generated method stub
-		stage = new Stage(new ScreenViewport());		
-		
-		
-
-		
-		
-		
-		
-		
-		//list= new List(skin);
-		
-		//list.setItems(new String[] {"one", "two", "three", "four"});
-		
-		
-		final TextButton btn = new TextButton("hello",skin);
-		
-		
-		//sp.addActor(btn);
-		
-		
-		
-		
-		
+		stage = new Stage(new ScreenViewport());
 		
 		table = new Table();
 		
-		table.align(Align.center | Align.bottom );
+		table.align(Align.center);
+		
 		
 		table.setPosition(0, 0);
 		table.setBounds(0, 0, Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
 		
-		table.add(btn);
-		
-		btn.addListener( new ClickListener(){
-			
-			@Override
-			public void clicked(InputEvent event, float x, float y) {
-				// TODO Auto-generated method stub
-				
-				dialog.show(stage);
-				
-				Timer.schedule(new Timer.Task() {
-					
-					@Override
-					public void run() {
-						// TODO Auto-generated method stub
-						System.out.println("dialog Showing");
-						dialog.remove();
-						dialog.hide();
-					
-					}
-				}, 3f);
-				
-			}
-		});
+		table.padTop(5);
+		table.add(btnStartGame);
+		table.row();
+		table.add(btnQuitGame);
 		
 		
 		stage.addActor(table);
-			
-		Gdx.input.setInputProcessor(stage);
-		
-		
-		
+	
 		
 	}
 	
@@ -138,9 +79,21 @@ public class MenuScreen implements Screen{
 	@Override
 	public void dispose() {
 		// TODO Auto-generated method stub
-		dialog.remove();
 	}
-	
-	
-	
+	public void startGame(ClickListener cl){
+		btnStartGame.addListener(cl);
+	}
+	public void quitGame(ClickListener cl){
+		btnQuitGame.addListener(cl);
+	}
+	public void setInputProcessor(){
+		Gdx.input.setInputProcessor(stage);
+	}
+
+
+	@Override
+	public void show() {
+		// TODO Auto-generated method stub
+		
+	}
 }

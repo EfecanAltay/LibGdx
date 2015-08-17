@@ -9,6 +9,7 @@ public class World extends Actor{
 	
 	Sprite world ;
 	
+	
 	public World() {
 	
 		world = new Sprite(new Texture("map.png"));
@@ -20,6 +21,10 @@ public class World extends Actor{
 		super.draw(batch, parentAlpha);
 		world.setPosition(getX(), getY());
 		world.draw(batch);
+		
+	}
+	
+	public class Map{
 		
 	}
 }

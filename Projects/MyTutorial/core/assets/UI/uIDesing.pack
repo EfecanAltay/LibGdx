@@ -1,0 +1,25 @@
+UiDesing.png
+ format: RGBA8888
+ filter: Nearest,Nearest
+ repeat : none
+window.background
+	rotate : false
+ 	xy : 0 , 0
+ 	size : 200,200
+ 	orig: 200,200
+ 	offset: 0,30
+ 	index : -1
+button.up
+	rotate : false
+ 	xy : 202, 0
+ 	size : 150,40
+ 	orig: 150,40
+ 	offset: 0,0
+ 	index : -1
+button.down
+	rotate : false
+ 	xy : 202 , 42
+ 	size : 150,40
+ 	orig: 150,40
+ 	offset: 0,0
+ 	index : -1
